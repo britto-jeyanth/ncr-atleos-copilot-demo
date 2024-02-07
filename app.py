@@ -912,5 +912,29 @@ def generate_title(conversation_messages):
     except Exception as e:
         return messages[-2]['content']
 
+@app.route('/api/get-speech-token', methods=['GET'])
+def get_speech_token():
+    speech_key = os.getenv('SPEECH_KEY')
+    speech_region = os.getenv('SPEECH_REGION')
+    #speech_key="96b1c0c0256e4e8b8664251ccad4dc3b"
+    #speech_region="eastus"
+
+
+    if speech_key == 'paste-your-speech-key-here' or speech_region == 'paste-your-speech-region-here':
+        return jsonify(error='You forgot to add your speech key or region to the .env file.'), 400
+    else:
+        headers = {
+            'Ocp-Apim-Subscription-Key': speech_key,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+
+        try:
+            token_response = requests.post(f'https://{speech_region}.api.cognitive.microsoft.com/sts/v1.0/issueToken', headers=headers)
+            token_response.raise_for_status()
+            return jsonify(token=token_response.text, region=speech_region)
+        except requests.exceptions.HTTPError:
+            return jsonify(error='There was an error authorizing your speech key.'), 401
+
+
 if __name__ == "__main__":
     app.run()

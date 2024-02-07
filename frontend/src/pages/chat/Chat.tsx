@@ -34,6 +34,9 @@ import { QuestionInput } from "../../components/QuestionInput";
 import { ChatHistoryPanel } from "../../components/ChatHistory/ChatHistoryPanel";
 import { AppStateContext } from "../../state/AppProvider";
 import { useBoolean } from "@fluentui/react-hooks";
+import App from './mttext';
+
+//const childRef = useRef();
 
 const enum messageStatus {
     NotRunning = "Not Running",
@@ -56,6 +59,14 @@ const Chat = () => {
     const [clearingChat, setClearingChat] = useState<boolean>(false);
     const [hideErrorDialog, { toggle: toggleErrorDialog }] = useBoolean(true);
     const [errorMsg, setErrorMsg] = useState<ErrorMessage | null>()
+    const [messageFromChild, setMessageFromChild] = useState('');
+
+    const handleMessage = (message: string) => {
+        setMessageFromChild(message);
+        //childRef.current.childFunction(message);
+        console.log(message)
+        makeApiRequestWithoutCosmosDB(message, appStateContext?.state?.currentChat?.id);
+      };
 
     const errorDialogContentProps = {
         type: DialogType.close,
@@ -567,6 +578,7 @@ const Chat = () => {
         return isLoading || (messages && messages.length === 0) || clearingChat || appStateContext?.state.chatHistoryLoadingState === ChatHistoryLoadingState.Loading
     }
 
+
     return (
         <div className={styles.container} role="main">
             {showAuthMessage ? (
@@ -657,6 +669,8 @@ const Chat = () => {
                                 </Stack>
                             )}
                             <Stack>
+                                <App handleMessage={handleMessage}/>
+                                
                                 {appStateContext?.state.isCosmosDBAvailable?.status !== CosmosDBStatus.NotConfigured && <CommandBarButton
                                     role="button"
                                     styles={{
@@ -712,6 +726,7 @@ const Chat = () => {
                                 </Dialog>
                             </Stack>
                             <QuestionInput
+                                //ref={childRef}
                                 clearOnSend
                                 placeholder="Type a new question..."
                                 disabled={isLoading}

@@ -12,17 +12,21 @@
     "@fluentui/react": "^8.105.3",
     "@fluentui/react-hooks": "^8.6.29",
     "@fluentui/react-icons": "^2.0.195",
+    "axios": "^1.6.7",
     "dompurify": "^3.0.8",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
+    "microsoft-cognitiveservices-speech-sdk": "^1.35.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^7.0.1",
     "react-router-dom": "^6.8.1",
     "react-uuid": "^2.0.0",
+    "reactstrap": "^9.2.2",
     "rehype-raw": "^6.1.1",
     "remark-gfm": "^3.0.1",
-    "remark-supersub": "^1.0.0"
+    "remark-supersub": "^1.0.0",
+    "universal-cookie": "^7.0.2"
   },
   "devDependencies": {
     "@types/dompurify": "^3.0.5",
