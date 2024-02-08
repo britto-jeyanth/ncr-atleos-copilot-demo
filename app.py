@@ -914,11 +914,8 @@ def generate_title(conversation_messages):
 
 @app.route('/api/get-speech-token', methods=['GET'])
 def get_speech_token():
-    speech_key = os.getenv('SPEECH_KEY')
-    speech_region = os.getenv('SPEECH_REGION')
-    #speech_key="96b1c0c0256e4e8b8664251ccad4dc3b"
-    #speech_region="eastus"
-
+    speech_key = os.getenv('AZURE_SPEECH_KEY')
+    speech_region = os.getenv('AZURE_SPEECH_REGION')
 
     if speech_key == 'paste-your-speech-key-here' or speech_region == 'paste-your-speech-region-here':
         return jsonify(error='You forgot to add your speech key or region to the .env file.'), 400
