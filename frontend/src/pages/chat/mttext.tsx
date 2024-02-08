@@ -6,6 +6,8 @@ import { ResultReason } from 'microsoft-cognitiveservices-speech-sdk';
 
 import * as speechsdk from 'microsoft-cognitiveservices-speech-sdk';
 import { AppStateContext } from "../../state/AppProvider";
+import Microphone from "../../assets/NCRAtleosMicIcon.png";
+
 
 import axios from 'axios';
 import Cookie from 'universal-cookie';
@@ -84,10 +86,9 @@ const App: React.FC<Props> = ({handleMessage}) => {
     }
 
     return (
-    
         <img
+        src={Microphone}
         className="container"
-    
         onClick={() => sttFromMic()}
         aria-label="clear chat button"
     />

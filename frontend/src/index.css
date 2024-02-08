@@ -39,8 +39,7 @@ html {
     top: 6px;
     left: -18px;
     width: 38px; 
-    height: 45px;
-    background-image: url('/assets/NCRAtleosMicIcon.png'); /* Add this line */
+    height: 27px;
     background-size: cover; /* This will ensure that your background covers the entire container */
     background-position: center; /* This will center your background image in the container */
 }
